@@ -9,7 +9,13 @@ import { fileURLToPath } from "url";
 import nodemailer from "nodemailer";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const app = express();
+// Add these lines to serve your website files
+const PORT = process.env.PORT || 3001;
+app.use(express.static(__dirname));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 const PORT = 3001;
 const JWT_SECRET = process.env.JWT_SECRET || "jamup-secret-key-2024-rwanda";
 
